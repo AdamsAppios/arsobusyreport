@@ -95,7 +95,7 @@ class Todos extends Component {
         .then((res) => this.refreshList());
       return;
     }
-    axios.post("${baseURL}/api/todos/", item).then((res) => this.refreshList());
+    axios.post(`${baseURL}/api/todos/`, item).then((res) => this.refreshList());
   };
   handleDelete = (item) => {
     axios
