@@ -27,7 +27,7 @@ export default class HomePage extends Component {
           <Route path="/labangon" component={Labangonreport} />
           <Route path="/talamban" component={Talambanreport} />
           <Route path="/formex" component={Formexample} />
-          <Route path="5thwodke/todos" component={Todos} />
+          <Route path="/5thwodke/todos" component={Todos} />
           <Route path="/rtr" component={Roadtoreact} />
         </Switch>
       </Router>
