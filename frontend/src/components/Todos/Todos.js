@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Modal from "./ctodos/Modal";
 import axios from "axios";
-
+let baseURL = "http://arsobusyreport.herokuapp.com";
 class Todos extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Todos extends Component {
   }
   refreshList = () => {
     axios
-      .get("http://localhost:8000/api/todos/")
+      .get(`${baseURL}/api/todos/`)
       .then((res) => this.setState({ todoList: res.data }))
       .catch((err) => console.log(err));
   };
@@ -91,17 +91,15 @@ class Todos extends Component {
     this.toggle();
     if (item.id) {
       axios
-        .put(`http://localhost:8000/api/todos/${item.id}/`, item)
+        .put(`${baseURL}/api/todos/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
-    axios
-      .post("http://localhost:8000/api/todos/", item)
-      .then((res) => this.refreshList());
+    axios.post("${baseURL}/api/todos/", item).then((res) => this.refreshList());
   };
   handleDelete = (item) => {
     axios
-      .delete(`http://localhost:8000/api/todos/${item.id}`)
+      .delete(`${baseURL}/api/todos/${item.id}`)
       .then((res) => this.refreshList());
   };
   createItem = () => {

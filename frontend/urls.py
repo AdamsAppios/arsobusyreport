@@ -8,7 +8,7 @@ urlpatterns = [
     path('labangon', index),
     path('talamban',index),
     path('formex', index),
-    path('todos',index),
+    path('5thwodke/todos',index),
     path('rtr',index),
     path('join/1', index)
 ]
