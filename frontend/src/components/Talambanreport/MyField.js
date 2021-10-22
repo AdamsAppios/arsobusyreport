@@ -27,7 +27,7 @@ const MyField = (props) => {
     let contendString = contend > 0 ? `\n Container Ending: ${contend}` : "";
     let shortCapString =
       capbeg - capend - (dealer + pickup + container) > 0
-        ? ` Short ug ${capbeg - capend - (dealer + pickup + container)}`
+        ? `= Short ug ${capbeg - capend - (dealer + pickup + container)}\n`
         : "";
     let capString = `\nCapseal beg: ${capbeg}, Capseal End:${capend} ${shortCapString}`;
 
@@ -41,14 +41,14 @@ const MyField = (props) => {
     }
     let expString =
       expenses.length > 0
-        ? `\nExpenses: ${expenses} \nTotal Expenses ${totalexpenses || 0} `
+        ? `\nExpenses: ${expenses} \nTotal Expenses: ${totalexpenses || 0} `
         : "";
     let ctakenString = ctaken > 0 ? `\nCash taken ${ctaken}` : "";
     let ctoCalc = totalAmount - totalexpenses - ctaken;
     let ctoShort =
       CTO - ctoCalc >= 0
-        ? `Over ug ${CTO - ctoCalc}`
-        : `Short ug ${CTO - ctoCalc}`;
+        ? `Over ug ${CTO - ctoCalc}\n`
+        : `Short ug ${CTO - ctoCalc}\n`;
     let ctoString = `\nCTO ${CTO} , CTO Calculated ${ctoCalc} = ${ctoShort}`;
     let striRes = `Date: ${date}\nDealer ${dealer}x9=${
       dealer * 9
@@ -92,7 +92,7 @@ const MyField = (props) => {
       <label>
         Report Result:
         <br />
-        <textarea rows="10" cols="50" {...props} {...field} />
+        <textarea rows="10" cols="70" {...props} {...field} />
       </label>
       {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
     </>
