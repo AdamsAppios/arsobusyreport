@@ -27,21 +27,29 @@ const Talambanreport = () => {
           date: new Date().toISOString().slice(0, 10),
           dealer: "",
           pickup: "",
+          small: "",
           container: "",
           expenses: "",
+          ctaken: "",
           CTO: "",
+          contend: "",
+          capbeg: "",
+          capend: "",
           duty: "",
         }}
         validationSchema={Yup.object({
           date: Yup.date(),
           dealer: Yup.number().required("Required"),
           pickup: Yup.number(),
+          small: Yup.number(),
           container: Yup.number(),
           expenses: Yup.string().max(250, "Must be 250 characters or less"),
+          ctaken: Yup.number(),
           CTO: Yup.number(),
-          duty: Yup.string()
-            .max(240, "Must be 240 characters or less")
-            .required("Required"),
+          contend: Yup.number(),
+          capbeg: Yup.number(),
+          capend: Yup.number(),
+          duty: Yup.string().max(240, "Must be 240 characters or less"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -52,6 +60,8 @@ const Talambanreport = () => {
         }}
       >
         <Form>
+          <button type="reset">Erase All</button>
+          <br />
           <MyTextInput label="date" name="date" type="date" />
           <br />
           <MyTextInput
@@ -69,9 +79,16 @@ const Talambanreport = () => {
           />
           <br />
           <MyTextInput
+            label="small"
+            name="small"
+            type="number"
+            placeholder="0"
+          />
+          <br />
+          <MyTextInput
             label="container"
             name="container"
-            type="text"
+            type="number"
             placeholder="0"
           />
           <br />
@@ -79,11 +96,38 @@ const Talambanreport = () => {
             label="expenses"
             name="expenses"
             type="text"
-            size="50"
-            placeholder="Example: Load=100, Pliti Dina=40, Sweldo=2000"
+            size="90"
+            placeholder="Example: Load=100, Sweldo Juan=2000, CA Juan=500"
+          />
+          <br />
+          <MyTextInput
+            label="Cash Taken"
+            name="ctaken"
+            type="number"
+            placeholder=""
           />
           <br />
           <MyTextInput label="CTO" name="CTO" type="text" placeholder="" />
+          <br />
+          <MyTextInput
+            label="Container Ending"
+            name="contend"
+            type="number"
+            placeholder=""
+          />
+          <br />
+          <MyTextInput
+            label="Capseal Beg"
+            name="capbeg"
+            type="number"
+            placeholder=""
+          />
+          <MyTextInput
+            label="Capseal End"
+            name="capend"
+            type="number"
+            placeholder=""
+          />
           <br />
           <MyTextInput
             label="Duty"
