@@ -32,6 +32,13 @@ ALLOWED_HOSTS = ["localhost","192.168.68.106", "arsobusyreport.herokuapp.com"]
 
 # Application definition
 
+REST_FRAMEWORK = {
+    # other settings...
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
