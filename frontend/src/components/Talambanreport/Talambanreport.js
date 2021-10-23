@@ -107,7 +107,7 @@ const Talambanreport = () => {
             placeholder=""
           />
           <br />
-          <MyTextInput label="CTO" name="CTO" type="text" placeholder="" />
+          <MyTextInput label="CTO" name="CTO" type="number" placeholder="" />
           <br />
           <MyTextInput
             label="Container Ending"

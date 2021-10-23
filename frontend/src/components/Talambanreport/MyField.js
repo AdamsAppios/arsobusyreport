@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useField, useFormikContext } from "formik";
+
 const MyField = (props) => {
   const {
     values: {
@@ -19,6 +20,9 @@ const MyField = (props) => {
     touched,
     setFieldValue,
   } = useFormikContext();
+
+  const inputEl = useRef(null);
+
   const StringProcessing = () => {
     let totalAmount = dealer * 9 + pickup * 10 + container * 150 + small * 5;
     let smallString = small > 0 ? `\nSmall : ${small}*5 = ${small * 5}` : "";
@@ -57,6 +61,12 @@ const MyField = (props) => {
     }${smallString}${contString}${ctakenString}\nTotal Amount : ${totalAmount}${ctoString}${expString}${capString}\nDuty: ${duty}`;
     return striRes;
   };
+
+  const copyCodeToClipboard = () => {
+    const el = inputEl;
+    el.current.select();
+    document.execCommand("copy");
+  };
   const [field, meta] = useField(props);
 
   useEffect(() => {
@@ -92,7 +102,8 @@ const MyField = (props) => {
       <label>
         Report Result:
         <br />
-        <textarea rows="10" cols="70" {...props} {...field} />
+        <button onClick={() => copyCodeToClipboard()}>Copy</button>
+        <textarea rows="10" cols="70" ref={inputEl} {...props} {...field} />
       </label>
       {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
     </>
