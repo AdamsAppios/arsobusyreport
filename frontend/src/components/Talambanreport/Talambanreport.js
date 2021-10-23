@@ -122,6 +122,7 @@ const Talambanreport = () => {
             type="number"
             placeholder=""
           />
+          <br />
           <MyTextInput
             label="Capseal End"
             name="capend"
