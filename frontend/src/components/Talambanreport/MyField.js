@@ -38,7 +38,9 @@ const MyField = (props) => {
     let totalexpenses = 0;
     try {
       expenses.split(",").map(function (x) {
-        totalexpenses += parseFloat(x.match(/=(\d*\.?\d*)/)[1]);
+        if (x.match(/=(\d*\.?\d*)/) !== null)
+          totalexpenses += parseFloat(x.match(/=(\d*\.?\d*)/)[1]) || 0;
+        else totalexpenses += 0;
       });
     } catch (err) {
       totalexpenses = 0;
