@@ -103,6 +103,7 @@ const MyField = (props) => {
         Report Result:
         <br />
         <button onClick={() => copyCodeToClipboard()}>Copy</button>
+        <br />
         <textarea rows="10" cols="70" ref={inputEl} {...props} {...field} />
       </label>
       {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
