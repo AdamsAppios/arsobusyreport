@@ -139,3 +139,5 @@ cython_debug/
 
 #node modules
 frontend/node_modules
+
+deploy2heroku.py
