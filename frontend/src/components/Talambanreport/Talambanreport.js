@@ -35,6 +35,7 @@ const Talambanreport = () => {
           contend: "",
           capbeg: "",
           capend: "",
+          TDS: "",
           duty: "",
         }}
         validationSchema={Yup.object({
@@ -49,6 +50,7 @@ const Talambanreport = () => {
           contend: Yup.number(),
           capbeg: Yup.number(),
           capend: Yup.number(),
+          TDS: Yup.number(),
           duty: Yup.string().max(240, "Must be 240 characters or less"),
         })}
         onSubmit={(values, { setSubmitting }) => {
@@ -129,6 +131,8 @@ const Talambanreport = () => {
             type="number"
             placeholder=""
           />
+          <br />
+          <MyTextInput label="TDS" name="tds" type="number" placeholder="Pilay TDS" />
           <br />
           <MyTextInput
             label="Duty"

@@ -15,6 +15,7 @@ const MyField = (props) => {
       contend,
       capbeg,
       capend,
+      tds,
       duty,
     },
     touched,
@@ -34,7 +35,7 @@ const MyField = (props) => {
         ? `= Short ug ${capbeg - capend - (dealer + pickup + container)}\n`
         : "";
     let capString = `\nCapseal beg: ${capbeg}, Capseal End:${capend} ${shortCapString}`;
-
+    let tdsString = `\nTDS : ${tds}`;
     let totalexpenses = 0;
     try {
       expenses.split(",").map(function (x) {
@@ -60,7 +61,7 @@ const MyField = (props) => {
       dealer * 9
     }\nPickup ${pickup}x10=${
       pickup * 10
-    }${smallString}${contString}${ctakenString}\nTotal Amount : ${totalAmount}${expString}${ctoString}${contendString}${capString}\nDuty: ${duty}`;
+    }${smallString}${contString}${ctakenString}\nTotal Amount : ${totalAmount}${expString}${ctoString}${contendString}${capString}${tdsString}\nDuty: ${duty}`;
     return striRes;
   };
 
@@ -85,6 +86,7 @@ const MyField = (props) => {
     contend,
     capbeg,
     capend,
+    tds,
     touched.dealer,
     touched.pickup,
     touched.duty,
@@ -95,6 +97,7 @@ const MyField = (props) => {
     touched.capbeg,
     touched.capend,
     touched.CTO,
+    touched.tds,
     setFieldValue,
     props.name,
   ]);
