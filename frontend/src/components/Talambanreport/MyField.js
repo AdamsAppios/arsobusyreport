@@ -60,7 +60,7 @@ const MyField = (props) => {
       dealer * 9
     }\nPickup ${pickup}x10=${
       pickup * 10
-    }${smallString}${contString}${ctakenString}\nTotal Amount : ${totalAmount}${ctoString}${expString}${capString}\nDuty: ${duty}`;
+    }${smallString}${contString}${ctakenString}\nTotal Amount : ${totalAmount}${ctoString}${expString}${contendString}${capString}\nDuty: ${duty}`;
     return striRes;
   };
 
