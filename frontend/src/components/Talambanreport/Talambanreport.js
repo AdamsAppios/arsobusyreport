@@ -39,7 +39,7 @@ const Talambanreport = () => {
         }}
         validationSchema={Yup.object({
           date: Yup.date(),
-          dealer: Yup.number().required("Required"),
+          dealer: Yup.number(),
           pickup: Yup.number(),
           small: Yup.number(),
           container: Yup.number(),
