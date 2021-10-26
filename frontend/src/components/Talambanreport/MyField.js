@@ -28,7 +28,7 @@ const MyField = (props) => {
     let smallString = small > 0 ? `\nSmall : ${small}*5 = ${small * 5}` : "";
     let contString =
       container > 0 ? `\nCont ${container}x150=${container * 150}` : "";
-    let contendString = contend > 0 ? `\n Container Ending: ${contend}` : "";
+    let contendString = contend > 0 ? `\nContainer Ending: ${contend}` : "";
     let shortCapString =
       capbeg - capend - (dealer + pickup + container) > 0
         ? `= Short ug ${capbeg - capend - (dealer + pickup + container)}\n`
