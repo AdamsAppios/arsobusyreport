@@ -87,7 +87,7 @@ const MyField = (props) => {
     capbeg,
     capend,
     tds,
-    touched.dealer,
+    /*touched.dealer,
     touched.pickup,
     touched.duty,
     touched.container,
@@ -97,7 +97,7 @@ const MyField = (props) => {
     touched.capbeg,
     touched.capend,
     touched.CTO,
-    touched.tds,
+    touched.tds, */
     setFieldValue,
     props.name,
   ]);
