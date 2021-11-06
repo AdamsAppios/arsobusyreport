@@ -25,7 +25,7 @@ class Todos extends Component {
     axios
       .get(`${baseURL}/api/todos/`)
       .then((res) => this.setState({ todoList: res.data }))
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log(err); window.location.href="/login/?next=/todos"});
   };
   displayCompleted = (status) => {
     if (status) {
