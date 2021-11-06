@@ -10,5 +10,6 @@ urlpatterns = [
     path('formex', index),
     path('todos',index),
     path('rtr',index),
-    path('join/1', index)
+    path('join/1', index),
+    path('tabs',index)
 ]

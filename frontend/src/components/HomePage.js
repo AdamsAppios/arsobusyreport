@@ -4,9 +4,10 @@ import Talambanreport from "./Talambanreport/Talambanreport";
 import Formexample from "./Formexample/Formexample";
 import Roadtoreact from "./Roadtoreact/Roadtoreact";
 import Todos from "./Todos/Todos";
+import Tabsreact from "./Tabsreact/Tabsreact";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link,
   Redirect,
@@ -20,16 +21,17 @@ export default class HomePage extends Component {
   render() {
     return (
       <Router>
-        <Switch>
+        <Routes>
           <Route exact path="/">
             <p>This is the home page</p>
           </Route>
           <Route path="/labangon" component={Labangonreport} />
           <Route path="/talamban" component={Talambanreport} />
           <Route path="/formex" component={Formexample} />
-          <Route path="/5thwodke/todos" component={Todos} />
+          <Route path="/todos" component={Todos} />
           <Route path="/rtr" component={Roadtoreact} />
-        </Switch>
+          <Route path="/tabs" Component={Tabsreact} />
+        </Routes>
       </Router>
     );
   }
