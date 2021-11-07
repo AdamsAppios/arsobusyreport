@@ -3,8 +3,8 @@ import Modal from "./ctodos/Modal";
 import axios from "axios";
 
 
-let baseURL = "https://arsobusyreport.herokuapp.com";
-//let baseURL = "http://localhost:8000";
+//let baseURL = "https://arsobusyreport.herokuapp.com";
+let baseURL = window.location.origin;
 // frontend/src/App.js
 
 
@@ -47,7 +47,7 @@ class Todos extends Component {
       .then(res => this.setState({ todoList: res.data }))
       .catch(err => {
         console.log(err);
-        window.location.href("/login?next=/todos")
+        window.location.href= "/login?next=/todos"
       }
       
       );
