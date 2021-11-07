@@ -31,12 +31,18 @@ ALLOWED_HOSTS = ["localhost","192.168.68.106", "arsobusyreport.herokuapp.com"]
 
 
 # Application definition
+DEFAULT_AUTHENTICATION_CLASSES = [
+    'rest_framework.authentication.SessionAuthentication'
+]
+DEFAULT_RENDERER_CLASSES = [
+        'rest_framework.renderers.JSONRenderer',
+    ]
 
 REST_FRAMEWORK = {
     # other settings...
 
-    'DEFAULT_AUTHENTICATION_CLASSES': [],
-    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
+    'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }
 
 INSTALLED_APPS = [
@@ -49,6 +55,7 @@ INSTALLED_APPS = [
     'frontend.apps.FrontendConfig',
     'api.apps.ApiConfig',
     'todo',
+    'accounts',
     'rest_framework',
     'corsheaders',
 ]
@@ -143,6 +150,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
+CORS_URLS_REGEX = r'^/api/.*$'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:8000',
      "https://arsobusyreport.herokuapp.com"

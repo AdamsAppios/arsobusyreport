@@ -3,8 +3,11 @@ import Modal from "./ctodos/Modal";
 import axios from "axios";
 
 
-let baseURL = "https://arsobusyreport.herokuapp.com";
-//let baseURL = "http://localhost:8000";
+//let baseURL = "https://arsobusyreport.herokuapp.com";
+let baseURL = "http://localhost:8000";
+// frontend/src/App.js
+
+
 class Todos extends Component {
   constructor(props) {
     super(props);
@@ -13,21 +16,38 @@ class Todos extends Component {
       activeItem: {
         title: "",
         description: "",
-        completed: false,
+        completed: false
       },
-      todoList: [],
+      todoList: []
     };
   }
+
+  getCookie = (name) => {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
   componentDidMount() {
     this.refreshList();
   }
   refreshList = () => {
     axios
-      .get(`${baseURL}/api/todos/`)
-      .then((res) => this.setState({ todoList: res.data }))
-      .catch((err) => {console.log(err); window.location.href="/login/?next=/todos"});
+      .get(`${baseURL}/api/todos/`, {headers: {"X-CSRFToken": this.getCookie("csrftoken")}})
+      .then(res => this.setState({ todoList: res.data }))
+      .catch(err => console.log(err));
   };
-  displayCompleted = (status) => {
+  displayCompleted = status => {
     if (status) {
       return this.setState({ viewCompleted: true });
     }
@@ -54,9 +74,9 @@ class Todos extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state;
     const newItems = this.state.todoList.filter(
-      (item) => item.completed === viewCompleted
+      item => item.completed === viewCompleted
     );
-    return newItems.map((item) => (
+    return newItems.map(item => (
       <li
         key={item.id}
         className="list-group-item d-flex justify-content-between align-items-center"
@@ -90,26 +110,28 @@ class Todos extends Component {
   toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
-  handleSubmit = (item) => {
+  handleSubmit = item => {
     this.toggle();
     if (item.id) {
       axios
-        .put(`${baseURL}/api/todos/${item.id}/`, item)
-        .then((res) => this.refreshList());
+        .put(`${baseURL}/api/todos/${item.id}/`, item, {headers: {"X-CSRFToken": this.getCookie("csrftoken")}})
+        .then(res => this.refreshList());
       return;
     }
-    axios.post(`${baseURL}/api/todos/`, item).then((res) => this.refreshList());
-  };
-  handleDelete = (item) => {
     axios
-      .delete(`${baseURL}/api/todos/${item.id}`)
-      .then((res) => this.refreshList());
+      .post(`${baseURL}/api/todos/`, item, {headers: {"X-CSRFToken": this.getCookie("csrftoken")}})
+      .then(res => this.refreshList());
+  };
+  handleDelete = item => {
+    axios
+      .delete(`${baseURL}/api/todos/${item.id}`, {headers: {"X-CSRFToken": this.getCookie("csrftoken")}})
+      .then(res => this.refreshList());
   };
   createItem = () => {
     const item = { title: "", description: "", completed: false };
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
-  editItem = (item) => {
+  editItem = item => {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
   render() {

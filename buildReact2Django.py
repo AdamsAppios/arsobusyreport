@@ -25,6 +25,7 @@ class Buredja:
             # print(content)
             scriptsString = re.findall(matchScripts, content, re.DOTALL)
             cssString = re.findall(matchCSS, content, re.DOTALL)
+            print(cssString)
             content_new = re.sub(
                 '<script src=\"\/static\/js\/[a-zA-Z0-9_\.]*\.js\">\<\/script\>', r'', content, count=2, flags=re.M)
             content_new = re.sub(
@@ -34,11 +35,11 @@ class Buredja:
             f.truncate()
         with open(r"templates/react/js.html", 'w+') as f:
             f.seek(0)
-            f.write(scriptsString[0] + "\n" + scriptsString[1])
+            f.write("{0}\n{1}".format(scriptsString[0], scriptsString[1]))
             f.truncate()
         with open(r"templates/react/css.html", 'w+') as f:
             f.seek(0)
-            f.write(cssString[0])
+            f.write("{0}\n{1}".format(cssString[0], cssString[1]))
             f.truncate()
 
     # overwrite source to dest folder function
