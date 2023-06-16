@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+#import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-xbyi-_85w3d4gl7u%4$#g@6-)85tw)*r=jd!4@gfdgplq)w#m=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","192.168.68.106", "arsobusyreport.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "192.168.68.106", "arsobusyreport.herokuapp.com", "127.0.0.1", "192.168.24.130"]
 
 
 # Application definition
@@ -35,8 +35,8 @@ DEFAULT_AUTHENTICATION_CLASSES = [
     'rest_framework.authentication.SessionAuthentication'
 ]
 DEFAULT_RENDERER_CLASSES = [
-        'rest_framework.renderers.JSONRenderer',
-    ]
+    'rest_framework.renderers.JSONRenderer',
+]
 
 REST_FRAMEWORK = {
     # other settings...
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'todo',
     'accounts',
+    'busyCctvCounter',
     'rest_framework',
     'corsheaders',
 ]
@@ -150,11 +151,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
+CORS_ORIGIN_ALLOW_ALL = True  # any website has access to my api
 CORS_URLS_REGEX = r'^/api/.*$'
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:8000',
-     "https://arsobusyreport.herokuapp.com"
+    'http://localhost:8000',
+    "https://arsobusyreport.herokuapp.com"
 ]
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())

@@ -20,7 +20,7 @@ class Buredja:
     def filterBaseHtml(self):
         with open(self.dstHtml, 'r+') as f:
             content = f.read()
-            matchScripts = r'(<script src="\/static\/js\/[a-zA-Z0-9_\.]*\.js"><\/script>)'
+            matchScripts = r'(<script\s+defer="defer"\s+src="\/static\/js\/main\.\w+\.js"><\/script>)'
             matchCSS = '<link href=\"\/static\/css\/[a-zA-Z0-9_\.]*\.css\" rel\="stylesheet">'
             # print(content)
             scriptsString = re.findall(matchScripts, content, re.DOTALL)
@@ -35,11 +35,13 @@ class Buredja:
             f.truncate()
         with open(r"templates/react/js.html", 'w+') as f:
             f.seek(0)
-            f.write("{0}\n{1}".format(scriptsString[0], scriptsString[1]))
+            for script in scriptsString:
+                f.write(script + "\n")
             f.truncate()
         with open(r"templates/react/css.html", 'w+') as f:
             f.seek(0)
-            f.write("{0}\n{1}".format(cssString[0], cssString[1]))
+            for cssStri in cssString:
+                f.write(cssStri + "\n")
             f.truncate()
 
     # overwrite source to dest folder function

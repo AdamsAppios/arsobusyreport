@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('login/', login_view),
     path('', include('frontend.urls')),
+    path('api/', include('rest_framework.urls')),
 ]
