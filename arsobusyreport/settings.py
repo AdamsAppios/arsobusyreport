@@ -155,7 +155,9 @@ CORS_ORIGIN_ALLOW_ALL = True  # any website has access to my api
 CORS_URLS_REGEX = r'^/api/.*$'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
-    "https://arsobusyreport.herokuapp.com"
+    "https://arsobusyreport.herokuapp.com",
+    "arsobusyreport-70e035834028.herokuapp.com"
+
 ]
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
