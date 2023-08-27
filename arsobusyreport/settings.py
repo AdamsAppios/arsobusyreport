@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-#import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xbyi-_85w3d4gl7u%4$#g@6-)85tw)*r=jd!4@gfdgplq)w#m='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "192.168.68.106", "arsobusyreport.herokuapp.com", "127.0.0.1", "192.168.24.130"]
+ALLOWED_HOSTS = ["localhost", "192.168.68.106", "arsobusyreport.herokuapp.com", "arsobusyreport-70e035834028.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -155,7 +154,16 @@ CORS_ORIGIN_ALLOW_ALL = True  # any website has access to my api
 CORS_URLS_REGEX = r'^/api/.*$'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
-    "https://arsobusyreport.herokuapp.com"
+    "https://arsobusyreport.herokuapp.com",
+    "https://arsobusyreport-70e035834028.herokuapp.com"
+
 ]
 
-#django_heroku.settings(locals())
+
+try:
+    import django_heroku
+    django_heroku.settings(locals())
+
+    # Use the module here if needed
+except ImportError:
+    pass  # Module not found, so just continue without using it

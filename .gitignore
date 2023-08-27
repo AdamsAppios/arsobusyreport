@@ -139,7 +139,6 @@ cython_debug/
 
 #node modules
 frontend/node_modules
-arsoreact/
 
 deploy2heroku.py
 buildReact2Django.py
