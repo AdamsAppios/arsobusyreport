@@ -14,6 +14,6 @@ urlpatterns = [
     path(r'join/1', index),
     path('', include('busyCctvCounter.urls')),
     path(r'cctv/talamban-model/', free),
-    path(r'/cctv/cctvpurejs', free),
+    path(r'cctv/cctvpurejs', free),
     path('rtab', index)
 ]
