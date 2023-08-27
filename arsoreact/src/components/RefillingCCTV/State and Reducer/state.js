@@ -2,14 +2,14 @@ export const initialState = {
     isBlue: false,
     isRed: false,
     originalBackgroundColor: '',
-    pickupCount: 0,
-    dealerCount: 0,
-    smallCount: 0,
-    squareCount: 0,
-    smallSquareCount: 0,
+    pickup: 0, //v
+    dealer: 0, //v
+    small: 0, //v
+    square: 0, //v
+    squareSmall: 0, //v
     selectedDropdownValue: "Bellaswan",
-    date: "",
-    time: "",
+    date_monitored: "", //v
+    cctvTime: "",       //v
     textAreaValue: "",
     multipleCount: "1",
     selectedOption: 'dealer'

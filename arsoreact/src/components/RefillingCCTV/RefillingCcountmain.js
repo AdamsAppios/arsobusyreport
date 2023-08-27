@@ -6,10 +6,14 @@ import RadioButtonGroup from './components/RadioButtonGroup';
 import ButtonGroup from './components/ButtonGroup';
 import DropdownSelectorGroup from './components/DropdownSelectorGroup';
 import { toggleBackgroundColor } from './Utilities/utils';
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
+import axios from 'axios';
+
 
 const RefillingCcountmain = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const [urlSaveLocation, setUrlSaveLocation] = useState(state.dropSelectLocation);
+    const [urlLoadLocation, setUrlLoadLocation] = useState(state.dropSelectLocation);
     const radioOptions = [
         { value: 'dealer', label: 'Dealer' },
         { value: 'pickup', label: 'Pickup' },
@@ -69,8 +73,23 @@ const RefillingCcountmain = () => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [state.multipleCount,state.isBlue, state.isRed, state.pickupCount, state.dealerCount, state.smallCount, state.smallSquareCount, state.squareCount, state.selectedOption]); 
+    }, [state.multipleCount,state.isBlue, state.isRed, state.pickup, state.dealer, state.small, state.squareSmall, state.square, state.selectedOption]); 
 
+    useEffect (()=> {
+        let urlSave = "";
+        if (state.selectedDropdownValue === "bellaswan") {
+          setUrlSaveLocation(`${urlSave}/api/talambansave/`);
+          setUrlLoadLocation("/api/talambanload/");
+        } else if (state.dropSelectLocation === "ARSO") {
+          setUrlSaveLocation(`${urlSave}/api/labangonsave/`);
+          setUrlLoadLocation("/api/labangonload/")
+        } else if (state.dropSelectLocation === "Kalimpio") {
+          setUrlSaveLocation(`${urlSave}/api/kalimpiosave/`);
+          setUrlLoadLocation("/api/kalimpioload/")
+        }
+        console.log(urlLoadLocation);
+      }, [state.selectedDropdownValue]);
+    
     const handleChange = (event) => {
         dispatch({
             type: actionTypes.SET_SELECTED_OPTION,
@@ -112,6 +131,32 @@ const RefillingCcountmain = () => {
             value: state.textAreaValue
         });
     };
+
+    const handleLoadDjango = async (dateMonitored) => {
+        try {
+          const response = await axios.get(`${urlLoadLocation}${dateMonitored}/`);
+          let dataToLoad = response.data;
+          //delete dataToLoad.id;
+          dispatch({ type: "loadData", dataToLoad: dataToLoad });
+          console.log(dataToLoad)
+          return response.data;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    
+      const handleSaveDjango = async (event) => {
+    
+        event.preventDefault();
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
+        try {
+          const response = await axios.post(`${urlSaveLocation}${state.date_monitored}/`, state);
+          console.log(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
     
     const setInputValue = (inputName, inputValue) => {
         dispatch({
@@ -134,8 +179,8 @@ const RefillingCcountmain = () => {
 
     return (
         <div style={bodyStyle}>
-            <InputGroup type="date" label="Date:" value={state.date} onChange={(e) => setInputValue('date', e.target.value)} />
-            <InputGroup type="time" label="Time:" value={state.time} onChange={(e) => setInputValue('time', e.target.value)} />
+            <InputGroup type="date" label="Date:" value={state.date_monitored} onChange={(e) => setInputValue('date_monitored', e.target.value)} />
+            <InputGroup type="time" label="Time:" value={state.cctvTime} onChange={(e) => setInputValue('cctvTime', e.target.value)} />
             <DropdownSelectorGroup
                 label="Dropdown"
                 value={state.selectedDropdownValue}
@@ -149,32 +194,32 @@ const RefillingCcountmain = () => {
 
             <InputGroup
                 label="Dealer"
-                value={state.dealerCount}
-                onChange={(e) => setInputValue('dealerCount', Number(e.target.value))}
+                value={state.dealer}
+                onChange={(e) => setInputValue('dealer', Number(e.target.value))}
             />
 
             <InputGroup
                 label="Pickup"
-                value={state.pickupCount}
-                onChange={(e) => setInputValue('pickupCount', Number(e.target.value))}
+                value={state.pickup}
+                onChange={(e) => setInputValue('pickup', Number(e.target.value))}
             />
 
             <InputGroup
                 label="Small"
-                value={state.smallCount}
-                onChange={(e) => setInputValue('smallCount', Number(e.target.value))}
+                value={state.small}
+                onChange={(e) => setInputValue('small', Number(e.target.value))}
             />
 
             <InputGroup
                 label="Square"
-                value={state.squareCount}
-                onChange={(e) => setInputValue('squareCount', Number(e.target.value))}
+                value={state.square}
+                onChange={(e) => setInputValue('square', Number(e.target.value))}
             />
 
             <InputGroup
                 label="Small Square"
-                value={state.smallSquareCount}
-                onChange={(e) => setInputValue('smallSquareCount', Number(e.target.value))}
+                value={state.squareSmall}
+                onChange={(e) => setInputValue('squareSmall', Number(e.target.value))}
             />
 
             <RadioButtonGroup 
@@ -193,7 +238,9 @@ const RefillingCcountmain = () => {
                 ></textarea>
             </div>
             <ButtonGroup buttons={ [{ label: 'Save', onClick: handleSave },
-                                    { label: 'Load', onClick: handleLoad },]} />
+                                    { label: 'Load', onClick: handleLoad },
+                                    { label: 'Save Django', onClick: handleSaveDjango },
+                                    { label: 'Load Django', onClick: handleLoadDjango },]} />
         </div>
     );
 

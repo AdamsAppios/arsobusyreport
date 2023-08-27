@@ -30,7 +30,6 @@ export default class HomePage extends Component {
           <Route path="/moncount" element={<Moneymain />} />
           <Route path="/cctv/talamban-model" element={<Refillingcc />} /> 
           <Route path="/cctv/cctvpurejs" element={<RefillingCcountmain />} /> 
-
         </Routes>
       </Router>
     );
