@@ -35,14 +35,14 @@ export const reducer = (state, action) => {
             return { ...state, isBlue: false, isRed: false };
         case actionTypes.SAVE_DATA:
             const dataString = `
-                Date=${state.date};
-                Time=${state.time};
+                Date=${state.date_monitored};
+                Time=${state.cctvTime};
                 Dropdown=${state.selectedDropdownValue};
-                Dealer=${state.dealerCount};
-                Pickup=${state.pickupCount};
-                Small=${state.smallCount};
-                Square=${state.squareCount};
-                SmallSquare=${state.smallSquareCount};
+                Dealer=${state.dealer};
+                Pickup=${state.pickup};
+                Small=${state.small};
+                Square=${state.square};
+                SmallSquare=${state.squareSmall};
             `;
             return { ...state, textAreaValue: dataString };
 
@@ -55,14 +55,14 @@ export const reducer = (state, action) => {
 
             return {
                 ...state,
-                date: values.Date || state.date,
-                time: values.Time || state.time,
+                date_monitored: values.Date || state.date,
+                cctvTime: values.Time || state.time,
                 selectedDropdownValue: values.Dropdown || state.selectedDropdownValue,
-                dealerCount: Number(values.Dealer) || state.dealerCount,
-                pickupCount: Number(values.Pickup) || state.pickupCount,
-                smallCount: Number(values.Small) || state.smallCount,
-                squareCount: Number(values.Square) || state.squareCount,
-                smallSquareCount: Number(values.SmallSquare) || state.smallSquareCount
+                dealer: Number(values.Dealer) || state.dealerCount,
+                pickup: Number(values.Pickup) || state.pickupCount,
+                small: Number(values.Small) || state.smallCount,
+                square: Number(values.Square) || state.squareCount,
+                squareSmall: Number(values.SmallSquare) || state.smallSquareCount
             };
         case actionTypes.SET_INPUT_VALUE:
             return { ...state, [action.inputName]: action.inputValue };
