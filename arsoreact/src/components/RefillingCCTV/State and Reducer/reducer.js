@@ -5,15 +5,15 @@ export const reducer = (state, action) => {
         case actionTypes.ADJUST_COUNT:
             switch (action.option) {
                 case 'dealer':
-                    return { ...state, multipleCount: "1" , dealerCount: state.dealerCount + action.adjustment };
+                    return { ...state, multipleCount: "1" , dealer: state.dealer + action.adjustment };
                 case 'pickup':
-                    return { ...state, multipleCount: "1", pickupCount: state.pickupCount + action.adjustment };
+                    return { ...state, multipleCount: "1", pickup: state.pickup + action.adjustment };
                 case 'small':
-                    return { ...state, multipleCount: "1", smallCount: state.smallCount + action.adjustment };
+                    return { ...state, multipleCount: "1", small: state.small + action.adjustment };
                 case 'square':
-                    return { ...state, multipleCount: "1", squareCount: state.squareCount + action.adjustment };
+                    return { ...state, multipleCount: "1", square: state.square + action.adjustment };
                 case 'smallSquare':
-                    return { ...state, multipleCount: "1",smallSquareCount: state.smallSquareCount + action.adjustment };
+                    return { ...state, multipleCount: "1",squareSmall: state.squareSmall + action.adjustment };
                 default:
                     return state;
             }
