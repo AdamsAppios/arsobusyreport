@@ -64,6 +64,8 @@ export const reducer = (state, action) => {
                 square: Number(values.Square) || state.squareCount,
                 squareSmall: Number(values.SmallSquare) || state.smallSquareCount
             };
+        case actionTypes.LOAD_DATA_FROM_DJANGO_SERVER:
+            return { ...state, ...action.dataToLoad};
         case actionTypes.SET_INPUT_VALUE:
             return { ...state, [action.inputName]: action.inputValue };
 

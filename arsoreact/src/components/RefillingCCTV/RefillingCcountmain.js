@@ -12,8 +12,9 @@ import axios from 'axios';
 
 const RefillingCcountmain = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [urlSaveLocation, setUrlSaveLocation] = useState(state.dropSelectLocation);
-    const [urlLoadLocation, setUrlLoadLocation] = useState(state.dropSelectLocation);
+    const [urlSaveLocation, setUrlSaveLocation] = useState('api/talambansave/');
+    const [urlLoadLocation, setUrlLoadLocation] = useState("/api/talambanload/");
+
     const radioOptions = [
         { value: 'dealer', label: 'Dealer' },
         { value: 'pickup', label: 'Pickup' },
@@ -78,13 +79,13 @@ const RefillingCcountmain = () => {
     useEffect (()=> {
         let urlSave = "";
         if (state.selectedDropdownValue === "bellaswan") {
-          setUrlSaveLocation(`${urlSave}/api/talambansave/`);
+          setUrlSaveLocation(`/api/talambansave/`);
           setUrlLoadLocation("/api/talambanload/");
         } else if (state.dropSelectLocation === "ARSO") {
-          setUrlSaveLocation(`${urlSave}/api/labangonsave/`);
+          setUrlSaveLocation(`/api/labangonsave/`);
           setUrlLoadLocation("/api/labangonload/")
         } else if (state.dropSelectLocation === "Kalimpio") {
-          setUrlSaveLocation(`${urlSave}/api/kalimpiosave/`);
+          setUrlSaveLocation(`/api/kalimpiosave/`);
           setUrlLoadLocation("/api/kalimpioload/")
         }
         console.log(urlLoadLocation);
@@ -132,12 +133,11 @@ const RefillingCcountmain = () => {
         });
     };
 
-    const handleLoadDjango = async (dateMonitored) => {
+    const handleLoadDjango = async () => {
         try {
-          const response = await axios.get(`${urlLoadLocation}${dateMonitored}/`);
+          const response = await axios.get(`${urlLoadLocation}${state.date_monitored}/`);
           let dataToLoad = response.data;
-          //delete dataToLoad.id;
-          dispatch({ type: "loadData", dataToLoad: dataToLoad });
+          dispatch({ type: actionTypes.LOAD_DATA_FROM_DJANGO_SERVER, dataToLoad: dataToLoad });
           console.log(dataToLoad)
           return response.data;
         } catch (error) {
@@ -149,9 +149,11 @@ const RefillingCcountmain = () => {
     
         event.preventDefault();
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        axios.defaults.baseURL = 'http://127.0.0.1:8001/';
         axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
+        const baseURL = 'http://127.0.0.1:8001/';
         try {
-          const response = await axios.post(`${urlSaveLocation}${state.date_monitored}/`, state);
+          const response = await axios.post(`${baseURL}${urlSaveLocation}${state.date_monitored}/`, state);
           console.log(response.data);
         } catch (error) {
           console.log(error);
